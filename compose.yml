@@ -1,0 +1,24 @@
+services:
+  bot:
+    build:
+      context: .
+      platforms: [linux/amd64, linux/arm64]
+    image: nikolaev2096/my_test_bot:v1
+    restart: unless-stopped  
+    volumes: [bot_db:/bot/database]
+    env_file: .env
+    labels: 
+      - "com.centurylinklabs.watchtower.enable=true"
+
+    watchtower:
+      image: containrrr/watchtower
+      container_name: watchtower
+      restart: unless-stopped
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+      command: --interval 30 --cleanup
+
+volumes:
+  bot_db:
+
+

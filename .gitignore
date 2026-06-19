@@ -1,0 +1,4 @@
+templates/txt_templates.py
+database/data_base.sqlite3
+__pycache__
+.env
